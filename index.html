@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .form-group {
+            display: flex;
+            flex-direction: column; /* Alinea verticalmente el label y el input */
+            align-items: center;   /* Centra horizontalmente */
+            margin-bottom: 20px;   /* Espacio entre grupos */
+        }
+
+        label {
+            font-size: 16px; /* Ajusta el tamaño del texto del label */
+            margin-bottom: 5px; /* Espacio entre el texto del label y el input */
+        }
+
+        input {
+            padding: 5px; /* Añade relleno al cuadro de texto */
+            width: 200px; /* Ajusta el ancho del cuadro de texto */
+        }
+
+        .radio-options {
+            display: flex;         /* Muestra los radios y textos en una línea */
+            justify-content: center; /* Centra los radios dentro del contenedor */
+            gap: 0px;
+            align-items: center;   /* Centra los elementos verticalmente */
+        }
+        .radio-options input {
+            width: auto;              /* Ajusta el tamaño de los radio buttons */
+        }
+        .modalidad-options {
+            display: none;            /* Inicialmente ocultamos las opciones de modalidad */
+            justify-content: center;  /* Centra las opciones */
+            margin-top: 10px;         /* Un pequeño margen superior */
+        }
+    </style>
+</head>
+<body>
+    <div class="form-group">
+        <label for="nombre"><b>Nombre</b></label>
+        <input type="text" name="nombre" id="nombre" placeholder="Introduzca su nombre">
+    </div>
+
+    <div class="form-group">
+        <label for="apellido"><b>Apellidos</b></label>
+        <input type="text" name="apellido" id="apellido" placeholder="Introduzca sus apellidos">
+    </div>
+    <div class="form-group">
+        <label for="registro">¿Desea registrarse en el concurso?</label>
+    </div>
+    <div class="radio-options">
+        <input type="radio" name="registro" id="si" value="si" onclick="mostrarModalidades()">
+        <label for="si">Sí</label>
+        <input type="radio" name="registro" id="no" value="no" onclick="ocultarModalidades()">
+        <label for="no">No</label>
+    </div>
+    <br>
+    <div class="form-group modalidad-options" id="modalidad-options">
+        <label>Seleccione modalidad:</label>
+        <div class="radio-options">
+            <input type="radio" id="modalidad1" name="modalidad" value="1">
+            <label for="modalidad1">Modalidad 1</label>
+            <input type="radio" id="modalidad2" name="modalidad" value="2">
+            <label for="modalidad2">Modalidad 2</label>
+        </div>
+    </div>
+    <script>
+        // Función para mostrar las opciones de modalidad cuando se selecciona "Sí"
+        function mostrarModalidades() {
+            document.getElementById("modalidad-options").style.display = "flex"; // Muestra las modalidades
+        }
+
+        // Función para ocultar las opciones de modalidad cuando se selecciona "No"
+        function ocultarModalidades() {
+            document.getElementById("modalidad-options").style.display = "none"; // Oculta las modalidades
+        }
+    </script>
+    <br>
+    <div class="form-group">
+        <label for="email"><b>Email</b></label>
+        <input type="text" name="email" id="email" placeholder="Introduzca su correo">
+    </div>
+    <br>
+    <div class="form-group">
+        <label for="fechanacimiento"><b>Fecha de Nacimiento</b></label>
+        <input type="date" name="fechanacimiento" id="fechanacimiento">
+    </div>
+    <br>
+    <div class="form-group">
+        <label for="contraseña"><b>Contraseña</b></label>
+        <input type="password" name="contraseña" id="contraseña" required>
+    </div>
+    <br>
+    <div class="form-group">
+        <label for="contraseña"><b>Confirmar Contraseña</b></label>
+        <input type="password" name="contraseña" id="contraseñaconfirmada" required>
+    </div>
+    <br>
+    <div class="form-group">
+        <button type="submit" id="submit">Enviar</button>
+    </div>
+    <script>
+        document.getElementById("submit").addEventListener("click", function(event) {
+            // Obtén los valores de las contraseñas
+            var contraseña = document.getElementById("contraseña").value;
+            var contraseñaconfirmada = document.getElementById("contraseñaconfirmada").value;
+            // Verifica si los campos están vacíos
+        if (contraseña === "" || contraseñaconfirmada === "" || nombre === "" || apellido === "" || email === "") {
+            event.preventDefault(); // Evita que el formulario se envíe
+            alert("Por favor, rellena todos los campos.");
+            return; // Sale de la función para no realizar más comprobaciones
+        }
+            // Compara las contraseñas
+            if (contraseña !== contraseñaconfirmada) {
+                event.preventDefault(); // Evita que el formulario se envíe
+                alert("Las contraseñas no coinciden.");
+            } else {
+                alert("Las contraseñas coinciden. El formulario se enviará.");
+            }
+        });
+    </script>
+</body>
+</html>
